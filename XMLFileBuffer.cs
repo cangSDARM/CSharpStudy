@@ -1,22 +1,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using UnityEngine;
 
 public class XMLFileBuffer{
 
     private XmlDocument xml;
 
     /// <summary>
-    /// 卡牌XML路径
+    /// XML路径
     /// </summary>
     private string _path;
     /// <summary>
     /// 测试文本
     /// </summary>
     private string defultText;
-
-    private List<Card> cards = new List<Card>();
     
     public struct Card {
         public string type;
@@ -51,18 +48,9 @@ public class XMLFileBuffer{
         }
     }
 
-#region 单例
-    private static XMLFileBuffer _xml;
-    public static XMLFileBuffer xmlFile() {
-        if(null == _xml) {
-            _xml = new XMLFileBuffer();
-        }
-        return _xml;
-    }
-#endregion
     private XMLFileBuffer() {
 
-        _path = Application.dataPath + "/Resources/XMLdoc/Card_doc.xml";
+        _path = System.Environment.CurrentDirectory + "/XMLdoc/Card_doc.xml";
         defultText = "defult";
         if (!File.Exists(_path)) {
             CreatXML();
@@ -72,7 +60,7 @@ public class XMLFileBuffer{
     }
 
     /// <summary>
-    /// 加载XML，且读取到cards里
+    /// 加载XML
     /// </summary>
     void LoadXML() {
         XmlReaderSettings set = new XmlReaderSettings();
@@ -92,8 +80,6 @@ public class XMLFileBuffer{
                     loadCard.cardName = card.GetAttribute("cardName");
                     loadCard.inner = card.InnerText;
                     loadCard.cost = card.GetAttribute("cost");
-
-                    cards.Add(loadCard);
                 }
             }
         }
@@ -111,6 +97,9 @@ public class XMLFileBuffer{
 
         //创建默认样板子节点
         XmlElement defult = xml.CreateElement(CardType(CardTypeNum.defult));
+
+        //设置节点属性
+        //defult.SetAttribute("NONE","Attribute");
 
         AddCardToXML("This is the card's name", defultText + ".png", "card's cost", "inner text", defult);
 
@@ -133,7 +122,7 @@ public class XMLFileBuffer{
     }
     
     /// <summary>
-    /// 添加卡牌数据
+    /// 添加XML数据
     /// </summary>
     /// <param name="cardName"></param>
     /// <param name="fileName">文件名</param>
