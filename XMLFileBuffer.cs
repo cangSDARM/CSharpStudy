@@ -63,9 +63,10 @@ public class XMLFileBuffer{
     /// 加载XML
     /// </summary>
     void LoadXML() {
-        XmlReaderSettings set = new XmlReaderSettings();
-        //忽视注释文档
-        set.IgnoreComments = true;
+        XmlReaderSettings set = new XmlReaderSettings {
+            //忽视注释文档
+            IgnoreComments = true
+        };
         xml.Load(XmlReader.Create(_path, set));
 
         XmlNodeList xmlNodeList = xml.SelectSingleNode("Card").ChildNodes;
@@ -73,18 +74,24 @@ public class XMLFileBuffer{
         foreach (XmlElement xmlE in xmlNodeList) {
             if (xmlE.Name != defultText) {
                 foreach (XmlElement card in xmlE.ChildNodes) {
-                    Card loadCard = new Card();
-
-                    loadCard.type = xmlE.Name;
-                    loadCard.fileName = card.GetAttribute("fileName");
-                    loadCard.cardName = card.GetAttribute("cardName");
-                    loadCard.inner = card.InnerText;
-                    loadCard.cost = card.GetAttribute("cost");
+                    Card loadCard = new Card {
+                        type = xmlE.Name,
+                        fileName = card.GetAttribute("fileName"),
+                        cardName = card.GetAttribute("cardName"),
+                        inner = card.InnerText,
+                        cost = card.GetAttribute("cost")
+                    };
                 }
             }
         }
     }
 
+    //删除节点
+    void RemoveNode() {
+        xml.SelectSingleNode("/root/defult");
+        xml.RemoveAll();
+        xml.Save(_path);
+    }
 
     /// <summary>
     /// 初始化XML
