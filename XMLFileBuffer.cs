@@ -92,6 +92,10 @@ public class XMLFileBuffer{
     void CreatXML() {
         xml = new XmlDocument();
 
+        //创建XML文档属性
+        XmlDeclaration dec = xml.CreateXmlDeclaration("1.0","utf-8",null);
+        xml.AppendChild(dec);
+
         //创建初始节点
         XmlElement root = xml.CreateElement("Card");
 
