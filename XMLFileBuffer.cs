@@ -134,6 +134,10 @@ public class XMLFileBuffer{
         cardXML.SetAttribute("cost", cost);
         cardXML.SetAttribute("cardName", cardName);
         cardXML.SetAttribute("fileName", fileName);
+
+        //ÃÌº”±Í«©
+        //cardXML.InnerXml = "<p>inner</p>";
+
         cardXML.InnerText = innerText;
 
         parent.AppendChild(cardXML);
