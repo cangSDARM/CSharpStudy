@@ -1,7 +1,8 @@
-<h1>vs.temp</h1>
-
->[委托](#weituo)
-
-<h2><span id="weituo">委托</span></h2>
-<b>使用情况</b></br>
-<ol><li>将方法作为参数传递</li></ol>
+# vs.temp
+[TOC]
+## <span id="weituo">委托</span></h2>
+**使用情况**
+1. 将方法作为参数传递
+## <span id="niming">匿名函数</span><sub>(lamda表达式是匿名函数的简写情况)</sub>
+**使用情况**
+1. 只使用一次函数的情况
