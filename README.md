@@ -1,5 +1,7 @@
 # vs.temp
-[TOC]
+>**[委托](#weituo)**
+>**[匿名函数](#niming)**
+>**[lamda表达式](#niming)**
 ## <span id="weituo">委托</span></h2>
 **使用情况**
 1. 将方法作为参数传递
